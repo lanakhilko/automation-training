@@ -139,6 +139,7 @@ public class FirstTest {
                 "Cannot Find Search Wikipedia input",
                 5
         );
+
         WebElement searchBox_element = waitForElementPresent(
                 By.id("org.wikipedia:id/search_src_text"),
                 "Can't find Search Box Default Text Block",
@@ -155,6 +156,47 @@ public class FirstTest {
 
     }
 
+    @Test
+    public void testSearchArticlesAndCancel() {
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Can't find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                "android",
+                "Can't find search input",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@index=0]"),
+                "No First Search Result Found",
+                15
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@index=1]"),
+                "No Second Search Result Found",
+                15
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "Can't find Cancel Search button",
+                5
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@index=0]"),
+                "At least one search result is still on screen",
+                15
+        );
+
+    }
 
     //Helpers
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds) {

@@ -20,8 +20,8 @@
       <file leaf-file-name="FirstTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FirstTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="134" column="7" selection-start-line="134" selection-start-column="7" selection-end-line="134" selection-end-column="7" />
+            <state relative-caret-position="93">
+              <caret line="158" column="7" selection-start-line="158" selection-start-column="7" selection-end-line="158" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -49,10 +49,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="71" />
-    <option name="y" value="68" />
-    <option name="width" value="1286" />
-    <option name="height" value="799" />
+    <option name="x" value="1709" />
+    <option name="y" value="-150" />
+    <option name="width" value="1627" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -105,7 +105,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.FirstTest.testDefaultSearchPresence">
+  <component name="RunManager" selected="JUnit.FirstTest.testSearchArticlesAndCancel">
     <configuration name="FirstTest" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaAppiumAutomation" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -125,23 +125,6 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    </configuration>
-    <configuration name="FirstTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaAppiumAutomation" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="FirstTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
     </configuration>
     <configuration name="FirstTest.testCancelSearch" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaAppiumAutomation" />
@@ -194,6 +177,23 @@
       </option>
       <patterns />
     </configuration>
+    <configuration name="FirstTest.testSearchArticlesAndCancel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaAppiumAutomation" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="FirstTest" />
+      <option name="METHOD_NAME" value="testSearchArticlesAndCancel" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -233,19 +233,19 @@
       <listeners />
     </configuration>
     <list>
-      <item itemvalue="JUnit.FirstTest" />
       <item itemvalue="JUnit.FirstTest.testCancelSearch" />
       <item itemvalue="JUnit.FirstTest.testCompareArticleTitle" />
       <item itemvalue="Android JUnit.FirstTest" />
       <item itemvalue="JUnit.FirstTest.testDefaultSearchPresence" />
+      <item itemvalue="JUnit.FirstTest.testSearchArticlesAndCancel" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FirstTest.testSearchArticlesAndCancel" />
         <item itemvalue="JUnit.FirstTest.testDefaultSearchPresence" />
         <item itemvalue="Android JUnit.FirstTest" />
         <item itemvalue="JUnit.FirstTest.testCompareArticleTitle" />
         <item itemvalue="JUnit.FirstTest.testCancelSearch" />
-        <item itemvalue="JUnit.FirstTest" />
       </list>
     </recent_temporary>
   </component>
@@ -263,39 +263,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="FirstTest - 2018.06.25 at 16h 03m 19s.xml">
-      <configuration name="FirstTest" configurationId="JUnit" />
+    <history-entry file="FirstTest_testDefaultSearchPresence - 2018.06.26 at 11h 21m 15s.xml">
+      <configuration name="FirstTest.testDefaultSearchPresence" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest - 2018.06.25 at 16h 05m 02s.xml">
-      <configuration name="FirstTest" configurationId="JUnit" />
+    <history-entry file="FirstTest_testDefaultSearchPresence - 2018.06.26 at 11h 22m 18s.xml">
+      <configuration name="FirstTest.testDefaultSearchPresence" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest - 2018.06.25 at 16h 05m 58s.xml">
-      <configuration name="FirstTest" configurationId="JUnit" />
+    <history-entry file="FirstTest_testSearchArticlesAndCancel - 2018.06.26 at 11h 42m 34s.xml">
+      <configuration name="FirstTest.testSearchArticlesAndCancel" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest - 2018.06.25 at 16h 40m 22s.xml">
-      <configuration name="FirstTest" configurationId="JUnit" />
+    <history-entry file="FirstTest_testSearchArticlesAndCancel - 2018.06.26 at 11h 43m 21s.xml">
+      <configuration name="FirstTest.testSearchArticlesAndCancel" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest - 2018.06.25 at 16h 58m 26s.xml">
-      <configuration name="FirstTest" configurationId="JUnit" />
+    <history-entry file="FirstTest_testSearchArticlesAndCancel - 2018.06.26 at 11h 43m 49s.xml">
+      <configuration name="FirstTest.testSearchArticlesAndCancel" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest_testCancelSearch - 2018.06.25 at 17h 17m 51s.xml">
-      <configuration name="FirstTest.testCancelSearch" configurationId="JUnit" />
+    <history-entry file="FirstTest_testSearchArticlesAndCancel - 2018.06.26 at 11h 44m 54s.xml">
+      <configuration name="FirstTest.testSearchArticlesAndCancel" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest_testCompareArticleTitle - 2018.06.26 at 10h 55m 31s.xml">
-      <configuration name="FirstTest.testCompareArticleTitle" configurationId="JUnit" />
+    <history-entry file="FirstTest_testSearchArticlesAndCancel - 2018.06.26 at 13h 04m 03s.xml">
+      <configuration name="FirstTest.testSearchArticlesAndCancel" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest_testCompareArticleTitle - 2018.06.26 at 11h 02m 18s.xml">
-      <configuration name="FirstTest.testCompareArticleTitle" configurationId="JUnit" />
+    <history-entry file="FirstTest_testSearchArticlesAndCancel - 2018.06.26 at 13h 05m 32s.xml">
+      <configuration name="FirstTest.testSearchArticlesAndCancel" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest_testCompareArticleTitle - 2018.06.26 at 11h 04m 27s.xml">
-      <configuration name="FirstTest.testCompareArticleTitle" configurationId="JUnit" />
+    <history-entry file="FirstTest_testSearchArticlesAndCancel - 2018.06.26 at 13h 06m 02s.xml">
+      <configuration name="FirstTest.testSearchArticlesAndCancel" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FirstTest - 2018.06.26 at 11h 06m 21s.xml">
-      <configuration name="FirstTest" configurationId="AndroidJUnit" />
+    <history-entry file="FirstTest_testSearchArticlesAndCancel - 2018.06.26 at 13h 06m 48s.xml">
+      <configuration name="FirstTest.testSearchArticlesAndCancel" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="71" y="68" width="1286" height="799" extended-state="0" />
+    <frame x="1709" y="-150" width="1627" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -306,12 +306,12 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2910345" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.21618852" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27216175" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21511985" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329235" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -363,8 +363,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FirstTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="134" column="7" selection-start-line="134" selection-start-column="7" selection-end-line="134" selection-end-column="7" />
+        <state relative-caret-position="93">
+          <caret line="158" column="7" selection-start-line="158" selection-start-column="7" selection-end-line="158" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

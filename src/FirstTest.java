@@ -132,6 +132,29 @@ public class FirstTest {
 
     }
 
+    @Test
+    public void testDefaultSearchPresence(){
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot Find Search Wikipedia input",
+                5
+        );
+        WebElement searchBox_element = waitForElementPresent(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Can't find Search Box Default Text Block",
+                15
+        );
+
+        String default_search = searchBox_element.getAttribute("text");
+
+        Assert.assertEquals(
+                "Unexpected Default Text in the Search Box",
+                "Search…",
+                default_search
+        );
+
+    }
+
 
     //Helpers
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds) {

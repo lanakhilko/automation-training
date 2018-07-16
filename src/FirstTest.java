@@ -524,6 +524,190 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void saveTwoArticlesToMyListAndDeleteOne(){
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot Find Search Wikipedia input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                "Java",
+                "Search Input not found",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
+                "Cannot Find Java Article in first search attempt",
+                5
+        );
+
+        waitForElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Can't find 'Object-oriented programming language' article Title",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageView[@content-desc='More options']"),
+                "Article hamburger menu button not found",
+                5
+        );
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            // Stop immediately and go home
+        }
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.TextView[contains(@text,'Add to reading list')]"),
+                "Can't find 'Add to reading list' option",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/onboarding_button"),
+                "Can't find 'Got it' tip overlay",
+                5
+        );
+
+        waitForElementAndClear(
+                By.id("org.wikipedia:id/text_input"),
+                "Can't find text input",
+                5
+        );
+
+        String name_of_folder = "Learning Programming";
+
+        waitForElementAndSendKeys(
+                By.id("org.wikipedia:id/text_input"),
+                name_of_folder,
+                "Can't type text into input",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='OK']"),
+                "Can't press 'OK' button",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Dismiss button not found",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot Find Search Wikipedia input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text, 'Search…')]"),
+                "Java",
+                "Search Input not found",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java version history']"),
+                "Cannot Find 'Java version history' Article",
+                5
+        );
+
+        waitForElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Can't find Second article Title",
+                15
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageView[@content-desc='More options']"),
+                "Article hamburger menu button not found",
+                5
+        );
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            // Stop immediately and go home
+        }
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.TextView[contains(@text,'Add to reading list')]"),
+                "Can't find 'Add to reading list' option",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.TextView[@text='Learning Programming']"),
+                "Can't find newly created 'Learning Programming' list in options available",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Dismiss button not found",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
+                "'My List' button not found",
+                5
+        );
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            // Stop immediately and go home
+        }
+
+        String saved_lists_locator = "//*[@resource-id='org.wikipedia:id/item_container']//*[@text='Learning Programming']";
+        waitForElementAndClick(
+                By.xpath(saved_lists_locator),
+                "'Learning Programming' list not found",
+                5
+        );
+
+        swipeElementLeft(
+                By.xpath("//android.widget.TextView[@text='Java (programming language)']"),
+                "Can't find 'Java (programming language)' saved article"
+        );
+
+        waitForElementNotPresent(
+                By.xpath("//android.widget.TextView[@text='Java (programming language)']"),
+                "Can not Delete 'Java (programming language)' article",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.TextView[@text='Java version history']"),
+                "Can't find 'Java version history article'",
+                5
+        );
+
+        WebElement title_element = waitForElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Can't find article Title",
+                15
+        );
+
+        String article_title = title_element.getAttribute("text");
+
+        Assert.assertEquals(
+                "Unexpected Title",
+                "Java version history",
+                article_title
+        );
+    }
+
 
 
     //Helpers
@@ -539,12 +723,20 @@ public class FirstTest {
         return waitForElementPresent(by, error_message, 5);
     }
 
+    public static void sleep(long ms)
+            throws InterruptedException {
+        while (true) {
+            if (Thread.interrupted()) {
+                throw new InterruptedException();
+            }
+        }
+    }
+
     private WebElement waitForElementAndClick(By by, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         element.click();
         return element;
     }
-
 
     private WebElement waitForElementAndSendKeys(By by, String value, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);

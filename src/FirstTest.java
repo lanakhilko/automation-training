@@ -557,11 +557,7 @@ public class FirstTest {
                 5
         );
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            // Stop immediately and go home
-        }
+       waitForMenuInit(true);
 
         waitForElementAndClick(
                 By.xpath("//android.widget.TextView[contains(@text,'Add to reading list')]"),
@@ -633,11 +629,7 @@ public class FirstTest {
                 5
         );
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            // Stop immediately and go home
-        }
+        waitForMenuInit(false);
 
         waitForElementAndClick(
                 By.xpath("//android.widget.TextView[contains(@text,'Add to reading list')]"),
@@ -663,11 +655,6 @@ public class FirstTest {
                 5
         );
 
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            // Stop immediately and go home
-        }
 
         String saved_lists_locator = "//*[@resource-id='org.wikipedia:id/item_container']//*[@text='Learning Programming']";
         waitForElementAndClick(
@@ -757,6 +744,41 @@ public class FirstTest {
                 throw new InterruptedException();
             }
         }
+    }
+
+    public void waitForMenuInit(boolean is_option_available) {
+        waitForElementPresent(
+                By.xpath("//*[@text='Change language']"),
+                "Cannot find Change language option",
+                5
+        );
+        waitForElementPresent(
+                By.xpath("//*[@text='Share link']"),
+                "Cannot find Share link option",
+                5
+        );
+        waitForElementPresent(
+                By.xpath("//*[@text='Add to reading list']"),
+                "Cannot find Add to reading list option",
+                5
+        );
+        waitForElementPresent(
+                By.xpath("//*[@text='Find in page']"),
+                "Cannot find Find in page option",
+                5
+        );
+        if (is_option_available){
+            waitForElementPresent(
+                    By.xpath("//*[@text='Similar pages']"),
+                    "Cannot find Similar pages option",
+                    5
+            );
+        }
+        waitForElementPresent(
+                By.xpath("//*[@text='Font and theme']"),
+                "Cannot find Font and theme option",
+                5
+        );
     }
 
     private WebElement waitForElementAndClick(By by, String error_message, long timeoutInSeconds) {

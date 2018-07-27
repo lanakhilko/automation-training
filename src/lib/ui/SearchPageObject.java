@@ -2,6 +2,7 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class SearchPageObject extends MainPageObject{
 
@@ -11,17 +12,19 @@ public class SearchPageObject extends MainPageObject{
             SEARCH_CANCEL_BUTTON = "org.wikipedia:id/search_close_btn",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
             SEARCH_RESULT_ELEMENTS = "//*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']",
-            SEARCH_EMPTY_RESULT_LABEL = "//android.widget.TextView[@text='No results found']";
+            SEARCH_EMPTY_RESULT_LABEL = "//android.widget.TextView[@text='No results found']",
+            SEARCH_BOX_DEFAULT_TEXT = "org.wikipedia:id/search_src_text",
+            SEARCH_X_BUTTON =  "org.wikipedia:id/search_close_btn";
 
     public SearchPageObject(AppiumDriver driver){
         super(driver);
     }
 
-    /* Tempkate Methods */
+    /* Template Methods */
     private static String getResultSearchElement(String substring){
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
-    /* Tempkate Methods */
+    /* Template Methods */
 
     public void initSearchInput(){
         this.waitForElementAndClick(By.xpath(SEARCH_INIT_ELEMENT), "Cannot Find Search Wikipedia input", 5);
@@ -71,6 +74,23 @@ public class SearchPageObject extends MainPageObject{
 
     public void assertThereIsNoSearchResults(){
 
-        this.assertElementNotPresent(By.xpath(SEARCH_RESULT_ELEMENTS), "Some serach results found when it shuldn't be present");
+        this.assertElementNotPresent(By.xpath(SEARCH_RESULT_ELEMENTS), "Some search results found when it shouldn't be present");
+    }
+
+    public WebElement waitForDefaultSearchTextBox(){
+       return this.waitForElementPresent(By.id(SEARCH_BOX_DEFAULT_TEXT), "Can't find default Search Box Text", 15);
+    }
+
+    public String getDefaultSearchText(){
+        WebElement default_search_text = waitForDefaultSearchTextBox();
+        return default_search_text.getAttribute("text");
+    }
+
+    public void cancelEmptySearch(){
+        this.waitForElementAndClick(By.id(SEARCH_X_BUTTON), "Can't Find X/Cancel search button", 5);
+    }
+
+    public void waitForCancelSearchButtonToDisappear(){
+        this.waitForElementNotPresent(By.xpath(SEARCH_X_BUTTON), "x/Cancel search button is still on screen", 15);
     }
 }

@@ -40,5 +40,18 @@ public class ArticleTests extends CoreTestCase {
         ArticlePageObject.swipeToFooter();
     }
 
+    //This one I would deprecate as it duplicates steps from some other tests, ex. "Swipe Article"
+    @Test
+    public void testAssertTitle(){
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Java");
+        SearchPageObject.clickArticleWithSubstring("Object-oriented programming language");
+
+        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject.waitForTitleElement();
+    }
+
 
 }

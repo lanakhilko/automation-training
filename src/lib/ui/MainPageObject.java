@@ -40,40 +40,6 @@ public class MainPageObject {
         }
     }
 
-    public void waitForMenuInit(boolean is_option_available) {
-        waitForElementPresent(
-                By.xpath("//*[@text='Change language']"),
-                "Cannot find Change language option",
-                5
-        );
-        waitForElementPresent(
-                By.xpath("//*[@text='Share link']"),
-                "Cannot find Share link option",
-                5
-        );
-        waitForElementPresent(
-                By.xpath("//*[@text='Add to reading list']"),
-                "Cannot find Add to reading list option",
-                5
-        );
-        waitForElementPresent(
-                By.xpath("//*[@text='Find in page']"),
-                "Cannot find Find in page option",
-                5
-        );
-        if (is_option_available){
-            waitForElementPresent(
-                    By.xpath("//*[@text='Similar pages']"),
-                    "Cannot find Similar pages option",
-                    5
-            );
-        }
-        waitForElementPresent(
-                By.xpath("//*[@text='Font and theme']"),
-                "Cannot find Font and theme option",
-                5
-        );
-    }
 
     public WebElement waitForElementAndClick(By by, String error_message, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);

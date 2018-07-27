@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 public class NavigationUI extends MainPageObject{
 
     private static final String
-    MY_LISTS_LINK = "//android.widget.ImageButton[@content-desc='Navigate up']";
+    MY_LISTS_LINK = "//android.widget.FrameLayout[@content-desc='My lists']";
 
     public NavigationUI(AppiumDriver driver){
 
@@ -17,7 +17,7 @@ public class NavigationUI extends MainPageObject{
 
        this.waitForElementAndClick(
                 By.xpath(MY_LISTS_LINK),
-                "Dismiss button not found",
+                "My Lists Entry Point Not found",
                 5
         );
     }

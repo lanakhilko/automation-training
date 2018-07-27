@@ -55,5 +55,42 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.assertThereIsNoSearchResults();
     }
 
+    @Test
+    public void testDefaultSearchPresence(){
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.initSearchInput();
+        SearchPageObject.waitForDefaultSearchTextBox();
+        String default_search = SearchPageObject.getDefaultSearchText();
+
+        assertEquals(
+                "Unexpected Default Text in the Search Box",
+                "Search…",
+                default_search
+        );
+    }
+
+    @Test
+    public void testClickSearchInputAndCancel() {
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.cancelEmptySearch();
+        SearchPageObject.waitForCancelSearchButtonToDisappear();
+    }
+
+    @Test
+    //This test is same as modified in the previous lesson "testSearch". I would delete this test as a duplicate.
+    public void testSearchRelevance() {
+
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.initSearchInput();
+        String search_line = "android";
+        SearchPageObject.typeSearchLine(search_line);
+        SearchPageObject.waitForSearchResult("Android");
+    }
+
 
 }

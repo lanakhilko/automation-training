@@ -14,8 +14,15 @@ public class ArticlePageObject extends MainPageObject {
             ADD_TO_MY_LIST_OVERLAY = "org.wikipedia:id/onboarding_button",
             MY_LIST_NAME_INPUT = "org.wikipedia:id/text_input",
             MY_LIST_OK_BUTTON = "//*[@text='OK']",
-            CLOSE_ARTICLE_BUTTON = "//android.widget.ImageButton[@content-desc='Navigate up']";
-
+            CLOSE_ARTICLE_BUTTON = "//android.widget.ImageButton[@content-desc='Navigate up']",
+            ARTICLE_OPTIONS_MENU_BUTTON = "//android.widget.ImageView[@content-desc='More options']",
+            LEARNING_PROGRAMMING_LIST = "//*[@resource-id='org.wikipedia:id/item_container']//*[@text='Learning Programming']",
+            ARTICLE_CHANGE_LANGUAGE_OPTION = "//*[@text='Change language']",
+            ARTICLE_CHANGE_LANGUAGE_OPTION
+    ARTICLE_CHANGE_LANGUAGE_OPTION
+            ARTICLE_CHANGE_LANGUAGE_OPTION
+    ARTICLE_CHANGE_LANGUAGE_OPTION
+            ARTICLE_CHANGE_LANGUAGE_OPTION
 
 
     public ArticlePageObject(AppiumDriver driver){
@@ -40,13 +47,7 @@ public class ArticlePageObject extends MainPageObject {
         );
     }
 
-    public void addArticleTitleToMyList(String name_of_folder){
-
-        this.waitForElementAndClick(
-                By.xpath(OPTIONS_BUTTON),
-                "Article hamburger menu button not found",
-                5
-        );
+    public void addArticleTitleToNewList(String name_of_folder){
 
         this.waitForElementAndClick(
                 By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
@@ -66,7 +67,6 @@ public class ArticlePageObject extends MainPageObject {
                 5
         );
 
-
         this.waitForElementAndSendKeys(
                 By.id(MY_LIST_NAME_INPUT),
                 name_of_folder,
@@ -81,11 +81,75 @@ public class ArticlePageObject extends MainPageObject {
         );
     }
 
+    public void addArticleTitleToExistingList(){
+
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                "Can't find 'Add to reading list' option",
+                5
+        );
+
+        this.waitForElementAndClick(
+                By.xpath(LEARNING_PROGRAMMING_LIST),
+                "Can't find Learning programming list",
+                5
+        );
+    }
+
     public void closeArticle(){
         this.waitForElementAndClick(
                 By.xpath(CLOSE_ARTICLE_BUTTON),
                 "Dismiss button not found",
                 5
         );
+    }
+
+    public void articleOptionsMenuClick() {
+        this.waitForElementAndClick(
+                By.xpath(ARTICLE_OPTIONS_MENU_BUTTON),
+                "Can't find and click Article options hamburger menu",
+                5
+        );
+    }
+
+    public void waitForMenuInit(boolean is_option_available) {
+
+        waitForElementPresent(
+                By.xpath(ARTICLE_CHANGE_LANGUAGE_OPTION),
+                "Cannot find Change language option",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Share link']"),
+                "Cannot find Share link option",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Add to reading list']"),
+                "Cannot find Add to reading list option",
+                5
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@text='Find in page']"),
+                "Cannot find Find in page option",
+                5
+        );
+
+        if (is_option_available){
+
+            waitForElementPresent(
+                    By.xpath("//*[@text='Similar pages']"),
+                    "Cannot find Similar pages option",
+                    5
+            ); }
+
+            waitForElementPresent(
+                    By.xpath("//*[@text='Font and theme']"),
+                    "Cannot find Font and theme option",
+                    5
+            );
     }
 }

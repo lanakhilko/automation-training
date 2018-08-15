@@ -1,28 +1,30 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
+import lib.Platform;
 import org.openqa.selenium.WebElement;
 
-public class ArticlePageObject extends MainPageObject {
+abstract public class ArticlePageObject extends MainPageObject {
 
-    public static final String
-            TITLE = "org.wikipedia:id/view_page_title_text",
-            FOOTER_ELEMENT = "//*[@text='View page in browser']",
-            OPTIONS_BUTTON = "//android.widget.ImageView[@content-desc='More options']",
-            OPTIONS_ADD_TO_MY_LIST_BUTTON = "//android.widget.TextView[@text='Add to reading list']",
-            ADD_TO_MY_LIST_OVERLAY = "org.wikipedia:id/onboarding_button",
-            MY_LIST_NAME_INPUT = "org.wikipedia:id/text_input",
-            MY_LIST_OK_BUTTON = "//*[@text='OK']",
-            CLOSE_ARTICLE_BUTTON = "//android.widget.ImageButton[@content-desc='Navigate up']",
-            ARTICLE_OPTIONS_MENU_BUTTON = "//android.widget.ImageView[@content-desc='More options']",
-            LEARNING_PROGRAMMING_LIST = "//*[@resource-id='org.wikipedia:id/item_container']//*[@text='Learning Programming']",
-            ARTICLE_CHANGE_LANGUAGE_OPTION = "//*[@text='Change language']",
-            ARTICLE_CHANGE_LANGUAGE_OPTION
-    ARTICLE_CHANGE_LANGUAGE_OPTION
-            ARTICLE_CHANGE_LANGUAGE_OPTION
-    ARTICLE_CHANGE_LANGUAGE_OPTION
-            ARTICLE_CHANGE_LANGUAGE_OPTION
+   protected static String
+            TITLE,
+            FOOTER_ELEMENT,
+            OPTIONS_BUTTON,
+            OPTIONS_ADD_TO_MY_LIST_BUTTON,
+            ADD_TO_MY_LIST_OVERLAY,
+            MY_LIST_NAME_INPUT,
+            MY_LIST_OK_BUTTON,
+            CLOSE_ARTICLE_BUTTON,
+            ARTICLE_OPTIONS_MENU_BUTTON,
+            LEARNING_PROGRAMMING_LIST,
+            ARTICLE_CHANGE_LANGUAGE_OPTION,
+            ARTICLE_SHARE_LINK_OPTION,
+            ARTICLE_ADD_TO_READING_LIST_OPTION,
+            ARTICLE_FIND_IN_PAGE_OPTION,
+            ARTICLE_SIMILAR_PAGES_OPTION,
+            RETURN_TO_EXPLORE_BUTTON,
+            ARTICLE_FONT_AND_THEME_OPTION,
+            SAVED_ARTICLES_EDUCATIONAL_OVERLAY_DISMISS_BUTTON;
 
 
     public ArticlePageObject(AppiumDriver driver){
@@ -31,51 +33,63 @@ public class ArticlePageObject extends MainPageObject {
     }
 
     public WebElement waitForTitleElement(){
-        return this.waitForElementPresent(By.id(TITLE), "Can't find article title on page", 15);
+        return this.waitForElementPresent(TITLE, "Can't find article title on page", 15);
     }
 
     public String getArticleTitle(){
         WebElement title_element = waitForTitleElement();
-        return title_element.getAttribute("text");
+        if(Platform.getInstance().isAndroid()) {
+            return title_element.getAttribute("text");
+        } else{
+            return title_element.getAttribute("name");
+        }
     }
 
     public void swipeToFooter(){
+        if (Platform.getInstance().isAndroid()){
         this.swipeUpToFindElement(
-                By.xpath(FOOTER_ELEMENT),
-                "Can't find the end of the articler",
-                20
+                FOOTER_ELEMENT,
+                "Can't find the end of the article",
+                40
         );
+        } else {
+            this.swipeUpTillElementAppears(
+                    FOOTER_ELEMENT,
+                    "Can't find the end of the article",
+                    40
+            );
+        }
     }
 
-    public void addArticleTitleToNewList(String name_of_folder){
+    public void addArticleTitleToNewListAndroid(String name_of_folder){
 
         this.waitForElementAndClick(
-                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                OPTIONS_ADD_TO_MY_LIST_BUTTON,
                 "Can't find 'Add to reading list' option",
                 5
         );
 
         this.waitForElementAndClick(
-                By.id(ADD_TO_MY_LIST_OVERLAY),
+                ADD_TO_MY_LIST_OVERLAY,
                 "Can't find 'Got it' tip overlay",
                 5
         );
 
        this.waitForElementAndClear(
-                By.id(MY_LIST_NAME_INPUT),
+                MY_LIST_NAME_INPUT,
                 "Can't find text input",
                 5
         );
 
         this.waitForElementAndSendKeys(
-                By.id(MY_LIST_NAME_INPUT),
+                MY_LIST_NAME_INPUT,
                 name_of_folder,
                 "Can't type text into input",
                 5
         );
 
         this.waitForElementAndClick(
-                By.xpath(MY_LIST_OK_BUTTON),
+                MY_LIST_OK_BUTTON,
                 "Can't press 'OK' button",
                 5
         );
@@ -84,29 +98,44 @@ public class ArticlePageObject extends MainPageObject {
     public void addArticleTitleToExistingList(){
 
         this.waitForElementAndClick(
-                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                OPTIONS_ADD_TO_MY_LIST_BUTTON,
                 "Can't find 'Add to reading list' option",
                 5
         );
 
         this.waitForElementAndClick(
-                By.xpath(LEARNING_PROGRAMMING_LIST),
+                LEARNING_PROGRAMMING_LIST,
                 "Can't find Learning programming list",
                 5
         );
     }
 
+    public void addArticleToMySavedIOS(){
+
+        this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Can't find add to Saved articles button", 5);
+    }
+
     public void closeArticle(){
-        this.waitForElementAndClick(
-                By.xpath(CLOSE_ARTICLE_BUTTON),
-                "Dismiss button not found",
-                5
-        );
+        if(Platform.getInstance().isAndroid()) {
+            this.waitForElementAndClick(
+                    CLOSE_ARTICLE_BUTTON,
+                    "Android Dismiss button not found",
+                    5
+            );
+        } else{
+            this.waitForElementPresent(RETURN_TO_EXPLORE_BUTTON, "Return to explore button not found", 10);
+            this.waitForElementAndClick(
+                    RETURN_TO_EXPLORE_BUTTON,
+                    "iOS Return to Explore button not found",
+                    15
+            );
+
+        }
     }
 
     public void articleOptionsMenuClick() {
         this.waitForElementAndClick(
-                By.xpath(ARTICLE_OPTIONS_MENU_BUTTON),
+                ARTICLE_OPTIONS_MENU_BUTTON,
                 "Can't find and click Article options hamburger menu",
                 5
         );
@@ -115,25 +144,25 @@ public class ArticlePageObject extends MainPageObject {
     public void waitForMenuInit(boolean is_option_available) {
 
         waitForElementPresent(
-                By.xpath(ARTICLE_CHANGE_LANGUAGE_OPTION),
+                ARTICLE_CHANGE_LANGUAGE_OPTION,
                 "Cannot find Change language option",
                 5
         );
 
         waitForElementPresent(
-                By.xpath("//*[@text='Share link']"),
+                ARTICLE_SHARE_LINK_OPTION,
                 "Cannot find Share link option",
                 5
         );
 
         waitForElementPresent(
-                By.xpath("//*[@text='Add to reading list']"),
+                ARTICLE_ADD_TO_READING_LIST_OPTION,
                 "Cannot find Add to reading list option",
                 5
         );
 
         waitForElementPresent(
-                By.xpath("//*[@text='Find in page']"),
+                ARTICLE_FIND_IN_PAGE_OPTION,
                 "Cannot find Find in page option",
                 5
         );
@@ -141,15 +170,24 @@ public class ArticlePageObject extends MainPageObject {
         if (is_option_available){
 
             waitForElementPresent(
-                    By.xpath("//*[@text='Similar pages']"),
+                    ARTICLE_SIMILAR_PAGES_OPTION,
                     "Cannot find Similar pages option",
                     5
             ); }
 
             waitForElementPresent(
-                    By.xpath("//*[@text='Font and theme']"),
+                    ARTICLE_FONT_AND_THEME_OPTION,
                     "Cannot find Font and theme option",
                     5
             );
+    }
+
+    public void dismissSavedArticlesFirstTimeUserOverlay() {
+
+        this.waitForElementAndClick(
+                SAVED_ARTICLES_EDUCATIONAL_OVERLAY_DISMISS_BUTTON,
+                "Can't dismiss first time user educational overlay",
+                5
+        );
     }
 }

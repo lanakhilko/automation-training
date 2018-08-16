@@ -32,6 +32,7 @@ public class MyListsTests extends CoreTestCase {
         ArticlePageObject.waitForTitleElement();
 
         if(Platform.getInstance().isAndroid()){
+            ArticlePageObject.articleOptionsMenuClick();
             ArticlePageObject.waitForMenuInit(true);
             ArticlePageObject.addArticleTitleToNewListAndroid(name_of_folder);
         } else{
@@ -43,7 +44,9 @@ public class MyListsTests extends CoreTestCase {
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
         NavigationUI.clickMyLists();
 
-        ArticlePageObject.dismissSavedArticlesFirstTimeUserOverlay();
+        if(Platform.getInstance().isIOS()){
+            ArticlePageObject.dismissSavedArticlesFirstTimeUserOverlay();
+        }
 
         MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
 
@@ -58,9 +61,11 @@ public class MyListsTests extends CoreTestCase {
     public void testSaveTwoArticlesToMyListAndDeleteOne(){
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
+
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
         SearchPageObject.clickArticleWithSubstring("Object-oriented programming language");
+
         ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
         ArticlePageObject.waitForTitleElement();
 

@@ -58,7 +58,7 @@ public class MyListsTests extends CoreTestCase {
     }
 
     @Test
-    public void testSaveTwoArticlesToMyListAndDeleteOne(){
+    public void testSaveTwoArticlesToMyListAndDeleteOne() {
 
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -71,46 +71,73 @@ public class MyListsTests extends CoreTestCase {
 
         String first_article_title = ArticlePageObject.getArticleTitle();
         assertEquals(
-                "Unexpected Article Title",
+                "Unexpected First Article Title",
                 "Java (programming language)",
                 first_article_title
         );
 
-        String name_of_folder = "Learning Programming";
-        ArticlePageObject.articleOptionsMenuClick();
-        ArticlePageObject.waitForMenuInit(true);
-        ArticlePageObject.addArticleTitleToNewListAndroid(name_of_folder);
+        if(Platform.getInstance().isAndroid()){
+            ArticlePageObject.articleOptionsMenuClick();
+            ArticlePageObject.waitForMenuInit(true);
+            ArticlePageObject.addArticleTitleToNewListAndroid(name_of_folder);
+        } else{
+            ArticlePageObject.addArticleToMySavedIOS();
+        }
+
         ArticlePageObject.closeArticle();
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
         SearchPageObject.clickArticleWithSubstring("Java version history");
+        if(Platform.getInstance().isAndroid()){
+            ArticlePageObject.waitForTitleElement();
 
-        String second_article_title = ArticlePageObject.getArticleTitle();
-        assertEquals(
-                "Unexpected Title",
-                "Java version history",
-                second_article_title
-        );
+            String second_article_title = ArticlePageObject.getArticleTitle();
+            assertEquals(
+                    "Unexpected Second Title",
+                    "Java version history",
+                    second_article_title
+            );
+        }
 
-        ArticlePageObject.articleOptionsMenuClick();
-        ArticlePageObject.waitForMenuInit(false);
-        ArticlePageObject.addArticleTitleToExistingList();
+        if(Platform.getInstance().isAndroid()){
+            ArticlePageObject.articleOptionsMenuClick();
+            ArticlePageObject.waitForMenuInit(false);
+            ArticlePageObject.addArticleTitleToExistingList();
+        } else{
+            ArticlePageObject.addArticleToMySavedIOS();
+        }
+
         ArticlePageObject.closeArticle();
 
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
         NavigationUI.clickMyLists();
 
-        MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
-        MyListsPageObject.openFolderByName(name_of_folder);
-        MyListsPageObject.swipeArticleToDelete(first_article_title);
-        MyListsPageObject.waitForArticleByTitleAndClick("Java version history");
+        if(Platform.getInstance().isIOS()){
+            ArticlePageObject.dismissSavedArticlesFirstTimeUserOverlay();
+        }
 
-        String remaining_article_title_in_my_lists = ArticlePageObject.getArticleTitle();
-        assertEquals(
-                "Unexpected Title",
-                "Java version history",
-                remaining_article_title_in_my_lists
-        );
+        MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
+
+        if(Platform.getInstance().isAndroid()) {
+            MyListsPageObject.openFolderByName(name_of_folder);
+        }
+
+        MyListsPageObject.swipeArticleToDelete(first_article_title);
+
+
+        if(Platform.getInstance().isAndroid()) {
+            MyListsPageObject.waitForArticleByTitleAndClick("Java version history");
+            String remaining_article_title_in_my_lists = ArticlePageObject.getArticleTitle();
+            assertEquals(
+                    "Unexpected Title",
+                    "Java version history",
+                    remaining_article_title_in_my_lists
+            );
+        } else{
+            MyListsPageObject.waitForArticleByTitleAndClick("Java version history");
+            MyListsPageObject.articleSavedIndicatorIsOnScreen();
+            MyListsPageObject.javaVersionsHistoryTableOfContentsVerification();
+        }
     }
 }

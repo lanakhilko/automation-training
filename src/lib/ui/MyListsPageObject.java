@@ -7,7 +7,10 @@ abstract public class MyListsPageObject extends MainPageObject {
 
     protected static String
             FOLDER_BY_NAME_TPL,
-            ARTICLE_BY_TITLE_TPL;
+            ARTICLE_BY_TITLE_TPL,
+            TABLE_OF_CONTENTS_MENU_BUTTON,
+            ARTICLE_SAVED_ACTIVE_BUTTON,
+            JAVA_VERSION_ARTICLE_CONTENTS;
 
     private static String getFolderXpathByName(String name_of_folder){
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
@@ -77,5 +80,23 @@ abstract public class MyListsPageObject extends MainPageObject {
         }
 
         this.waitForArticleToDisappearByTitle(article_title);
+    }
+
+    public void articleSavedIndicatorIsOnScreen(){
+
+        waitForElementPresent(
+                ARTICLE_SAVED_ACTIVE_BUTTON,
+                "No indicator that current article is in the saved list found",
+                5
+        );
+    }
+
+    public void javaVersionsHistoryTableOfContentsVerification(){
+        waitForElementAndClick(TABLE_OF_CONTENTS_MENU_BUTTON, "Can't find and click Table Of Contents button", 5);
+        waitForElementPresent(
+                JAVA_VERSION_ARTICLE_CONTENTS,
+                "Can not find Java version history in article contents",
+                5
+        );
     }
 }

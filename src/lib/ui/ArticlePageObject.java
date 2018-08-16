@@ -190,4 +190,5 @@ abstract public class ArticlePageObject extends MainPageObject {
                 5
         );
     }
+
 }

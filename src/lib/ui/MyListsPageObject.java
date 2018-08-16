@@ -1,6 +1,7 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
 
 abstract public class MyListsPageObject extends MainPageObject {
 
@@ -69,6 +70,12 @@ abstract public class MyListsPageObject extends MainPageObject {
                 article_xpath,
                 "Can't find saved article"
         );
+
+        if (Platform.getInstance().isIOS()){
+
+            this.clickDeleteElementInRightUpperCorner(article_xpath, "Can't find saved article to delete");
+        }
+
         this.waitForArticleToDisappearByTitle(article_title);
     }
 }

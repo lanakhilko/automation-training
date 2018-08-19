@@ -36,12 +36,12 @@ public class SearchTests extends CoreTestCase {
         SearchPageObject.initSearchInput();
         String search_line = "Linkin Park Discography";
         SearchPageObject.typeSearchLine(search_line);
-        int amount_of_search_results = SearchPageObject.getNumberOfSearchResults();
 
-        assertTrue(
-                "We found too few results",
-                amount_of_search_results > 0
-        );
+            int amount_of_search_results = SearchPageObject.getNumberOfSearchResults();
+            assertTrue(
+                    "We found too few results",
+                    amount_of_search_results > 0
+            );
     }
 
     @Test
